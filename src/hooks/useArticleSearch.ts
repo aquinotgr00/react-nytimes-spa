@@ -38,7 +38,6 @@ export const useArticleSearch = () => {
 
     if (!navigator.onLine) {
       const cached = localStorage.getItem('cachedArticles');
-      console.log(cached, 'cached')
       if (cached) {
         setArticles(JSON.parse(cached));
         setError('You are offline. Showing cached articles.');
