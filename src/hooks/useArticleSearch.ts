@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { NYTAPIService } from '../services/nytAPI';
 import type { NYTArticle, SearchFilters } from '../types/article';
 
@@ -8,7 +8,7 @@ export const useArticleSearch = () => {
   const [error, setError] = useState<string | null>(null);
   const [totalResults, setTotalResults] = useState(0);
 
-  const hasFetched = useRef(false);
+  // const hasFetched = useRef(false);
 
   const [filters, setFilters] = useState<SearchFilters>({
     query: '',
@@ -36,10 +36,22 @@ export const useArticleSearch = () => {
     setLoading(true);
     setError(null);
 
+    if (!navigator.onLine) {
+      const cached = localStorage.getItem('cachedArticles');
+      console.log(cached, 'cached')
+      if (cached) {
+        setArticles(JSON.parse(cached));
+        setError('You are offline. Showing cached articles.');
+        setLoading(false);
+        return;
+      }
+    }
+
     try {
       const response = await NYTAPIService.searchArticles(searchFilters);
       setArticles(response.response.docs);
       setTotalResults(response.response.metadata.hits);
+      localStorage.setItem('cachedArticles', JSON.stringify(response.response.docs));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred while searching articles');
       setArticles([]);
@@ -75,13 +87,13 @@ export const useArticleSearch = () => {
   }, [filters, searchArticles]);
 
   // add initial api hit on mount
-  useEffect(() => {
-    if (!hasFetched.current) {
-      searchArticles(filters);
-      hasFetched.current = true;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   if (!hasFetched.current) {
+  //     searchArticles(filters);
+  //     hasFetched.current = true;
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return {
     articles,

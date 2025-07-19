@@ -21,7 +21,7 @@ export const ArticleGrid: React.FC<ArticleGridProps> = ({
   filters,
   onPageChange,
 }) => {
-  if (error) {
+  if (error && navigator.onLine) {
     return (
       <Alert
         message="Error Loading Articles"
