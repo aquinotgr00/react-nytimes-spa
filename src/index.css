@@ -45,9 +45,9 @@
 }
 
 /* Ant Design customizations */
-.ant-card {
+/* .ant-card {
   border: 1px solid #f1f5f9 !important;
-}
+} */
 
 .ant-card:hover {
   border-color: #e2e8f0 !important;
