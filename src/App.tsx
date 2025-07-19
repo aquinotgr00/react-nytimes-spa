@@ -1,12 +1,12 @@
-import React from 'react';
-import { ConfigProvider } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { ConfigProvider, theme as antdTheme } from 'antd';
 import { Header } from './components/Header';
 import { SearchForm } from './components/SearchForm';
 import { ArticleGrid } from './components/ArticleGrid';
 import { APIKeyNotice } from './components/APIKeyNotice';
 import { useArticleSearch } from './hooks/useArticleSearch';
 
-const theme = {
+const themeConfig = {
   token: {
     colorPrimary: '#2563eb',
     borderRadius: 8,
@@ -15,6 +15,20 @@ const theme = {
 };
 
 function App() {
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem('darkMode') === 'true';
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
+    }
+  }, [darkMode]);
+
   const {
     articles,
     loading,
@@ -27,20 +41,22 @@ function App() {
   } = useArticleSearch();
 
   return (
-    <ConfigProvider theme={theme}>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        
+    <ConfigProvider
+      theme={{
+        ...themeConfig,
+        algorithm: darkMode ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
+      }}
+    >
+      <div className={`min-h-screen ${darkMode ? 'bg-gray-950' : 'bg-gray-50'}`}>
+        <Header darkMode={darkMode} onToggleDarkMode={() => setDarkMode((d) => !d)} />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <APIKeyNotice />
-          
           <SearchForm
             filters={filters}
             onFiltersChange={handleFiltersChange}
             onSearch={handleSearch}
             loading={loading}
           />
-
           <ArticleGrid
             articles={articles}
             loading={loading}

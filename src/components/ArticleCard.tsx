@@ -20,7 +20,8 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
   return (
     <Card
       hoverable
-      className="h-full shadow-sm hover:shadow-md transition-all duration-300 border-0 rounded-xl overflow-hidden cursor-pointer"
+      variant="borderless"
+      className="h-full shadow-sm hover:shadow-md transition-all duration-300 rounded-xl overflow-hidden cursor-pointer"
       onClick={handleCardClick}
       cover={
         imageUrl && (
@@ -44,7 +45,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => {
           <ExternalLink className="w-4 h-4 text-gray-400 flex-shrink-0 mt-1" />
         </div>
 
-        <h3 className="text-lg font-semibold text-gray-900 leading-tight line-clamp-2 hover:text-blue-600 transition-colors">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 leading-tight line-clamp-2 hover:text-blue-600 transition-colors">
           {article.headline.main}
         </h3>
 

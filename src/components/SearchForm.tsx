@@ -61,7 +61,7 @@ export const SearchForm: React.FC<SearchFormProps> = ({
   };
 
   return (
-    <Card className="mb-6 shadow-sm border-0">
+    <Card className="mb-6 shadow-sm" variant='borderless'>
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
