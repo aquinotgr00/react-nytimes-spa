@@ -5,7 +5,6 @@ A single-page application built with React that displays top articles from The N
 ## 📌 Features
 
 - Fetches and displays top news stories
-- Article details view (title, abstract, published date, image, etc.)
 - Responsive, mobile-friendly layout
 - Basic error handling and loading states
 
@@ -34,7 +33,6 @@ A single-page application built with React that displays top articles from The N
      ```dotenv
      VITE_NYT_API_KEY=YOUR_API_KEY_HERE
      ```
-   - Or replace placeholder in the code/API calls directly.
 
 4. **Run the app in development mode:**
     ```bash
@@ -51,5 +49,8 @@ A single-page application built with React that displays top articles from The N
 - `npm run build` — bundles the app for production (to `build/` folder).
 - `npm run lint` — checks for linting issues (if ESLint is set up).
 
-## 🔧 Project Structure
+## 📄 License
 
+This project is open‑source under the [MIT License](LICENSE).
+
+---
