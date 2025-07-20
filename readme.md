@@ -32,7 +32,7 @@ A single-page application built with React that displays top articles from The N
 3. **Set up the API key:**
    - Create a file `.env.local` in the project root with:
      ```dotenv
-     REACT_APP_NYTIMES_API_KEY=YOUR_API_KEY_HERE
+     VITE_NYT_API_KEY=YOUR_API_KEY_HERE
      ```
    - Or replace placeholder in the code/API calls directly.
 
