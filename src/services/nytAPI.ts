@@ -2,9 +2,10 @@ import { NYTSearchResponse, SearchFilters } from '../types/article';
 
 const NYT_API_BASE_URL = 'https://api.nytimes.com/svc/search/v2';
 
-// Note: In a real application, this should be stored in environment variables
-// For demo purposes, we'll use a placeholder that users need to replace
-const API_KEY = 'Xxq0NXQKSaVAworcB1JBlHPKHU1Wmimw'; // Users need to replace this with their actual NYT API key
+const API_KEY = import.meta.env.VITE_NYT_API_KEY || '';
+
+// Debug: Check if environment variable is loaded
+console.log('API Key loaded:', import.meta.env.VITE_NYT_API_KEY ? 'Yes' : 'No');
 
 export class NYTAPIService {
   private static formatDate(date: string): string {
